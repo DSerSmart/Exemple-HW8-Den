@@ -1,9 +1,9 @@
 import { Field, Formik, ErrorMessage, Form } from 'formik';
 import ScaleLoader from 'react-spinners/ScaleLoader';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { register } from 'redux/auth/operations';
-import { selectIsAuthLoading } from 'redux/auth/selectors';
+import { useAuth } from 'hooks';
 
 const values = {
   name: '',
@@ -27,8 +27,7 @@ const SignUpValidationSchema = Yup.object().shape({
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
-  const isAuthLoading = useSelector(selectIsAuthLoading);
-
+  const { isAuthLoading } = useAuth();
   const handleSubmit = values => {
     dispatch(register(values));
   };
