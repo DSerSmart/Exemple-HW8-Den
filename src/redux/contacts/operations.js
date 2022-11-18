@@ -19,7 +19,7 @@ export const fetchContacts = createAsyncThunk(
 
 export const addContact = createAsyncThunk(
   'contacts/addContact',
-  async ({ name, number }, thunkAPI) => {
+  async ({ firstName: name, phone: number }, thunkAPI) => {
     try {
       const response = await axios.post('/contacts', { name, number });
       Notify.success('Contact successfully ADDED');

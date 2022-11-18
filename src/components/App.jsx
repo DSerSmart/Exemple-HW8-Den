@@ -9,7 +9,7 @@ import { refresh } from 'redux/auth/operations';
 const HomePage = lazy(() => import('../pages/MainPage'));
 const RegisterPage = lazy(() => import('../pages/Register'));
 const LoginPage = lazy(() => import('../pages/Login'));
-const TasksPage = lazy(() => import('../pages/PhoneBook'));
+const PhoneBook = lazy(() => import('../pages/PhoneBook'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -25,21 +25,25 @@ export const App = () => {
         <Route
           path="/register"
           element={
-            <RestrictedRoute redirectTo="/tasks" component={<RegisterPage />} />
+            <RestrictedRoute
+              redirectTo="/contacts"
+              component={<RegisterPage />}
+            />
           }
         />
         <Route
           path="/login"
           element={
-            <RestrictedRoute redirectTo="/tasks" component={<LoginPage />} />
+            <RestrictedRoute redirectTo="/contacts" component={<LoginPage />} />
           }
         />
         <Route
-          path="/tasks"
+          path="/contacts"
           element={
-            <PrivateRoute redirectTo="/login" component={<TasksPage />} />
+            <PrivateRoute redirectTo="/login" component={<PhoneBook />} />
           }
         />
+        <Route path="*" element={<p></p>} />
       </Route>
     </Routes>
   );
