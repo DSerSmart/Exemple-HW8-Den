@@ -25,7 +25,7 @@ export const register = createAsyncThunk(
     try {
       const response = await axios.post('/users/signup', credentials);
       setAuthHeader(response.data.token);
-      Notify.success('SIGNUP successfully');
+      Notify.success('SingUp successfully');
       return response.data;
     } catch (e) {
       Notify.failure(e.message);
@@ -41,7 +41,7 @@ export const login = createAsyncThunk(
     try {
       const response = await axios.post('/users/login', credentials);
       setAuthHeader(response.data.token);
-      Notify.success('SIGNIN successfully');
+      Notify.success('SignIn successfully');
       return response.data;
     } catch (e) {
       Notify.failure(e.message);
@@ -55,7 +55,7 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await axios.post('/users/logout');
     clearAuthHeader();
-    Notify.success('LOGOUT successfully');
+    Notify.success('LogOut successfully');
   } catch (e) {
     Notify.failure(e.message);
     return thunkAPI.rejectWithValue(e.message);
@@ -74,7 +74,6 @@ export const refresh = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
   try {
     setAuthHeader(persistedToken);
     const response = await axios.get('/users/current');
-    // Notify.success('REFRESH successfully');
     return response.data;
   } catch (e) {
     Notify.failure(e.message);

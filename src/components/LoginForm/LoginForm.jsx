@@ -1,10 +1,10 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login } from 'redux/auth/operations';
-import { selectIsAuthLoading, selectIsRefreshing } from 'redux/auth/selectors';
 import TextField from '@mui/material/TextField';
 import { Box, Button } from '@mui/material';
+import { useAuth } from 'hooks';
 
 const values = {
   email: '',
@@ -18,8 +18,7 @@ const SignInValidationSchema = Yup.object().shape({
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
-  const isRefreshing = useSelector(selectIsRefreshing);
-  const isAuthLoading = useSelector(selectIsAuthLoading);
+  const { isRefreshing } = useAuth();
 
   const handleSubmit = values => {
     dispatch(login(values));
